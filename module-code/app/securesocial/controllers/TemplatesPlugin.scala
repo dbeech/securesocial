@@ -53,16 +53,7 @@ trait TemplatesPlugin extends Plugin {
    * @tparam A
    * @return
    */
-  def getSignUpPage[A](implicit request: Request[A], form: Form[RegistrationInfo], token: String): Html
-
-  /**
-   * Returns the html for the start signup page
-   *
-   * @param request
-   * @tparam A
-   * @return
-   */
-  def getStartSignUpPage[A](implicit request: Request[A], form: Form[String]): Html
+  def getSignUpPage[A](implicit request: Request[A], form: Form[RegistrationInfo]): Html
 
   /**
    * Returns the html for the reset password page
@@ -171,12 +162,8 @@ class DefaultTemplatesPlugin(application: Application) extends TemplatesPlugin {
     securesocial.views.html.login(form, msg)
   }
 
-  override def getSignUpPage[A](implicit request: Request[A], form: Form[RegistrationInfo], token: String): Html = {
-    securesocial.views.html.Registration.signUp(form, token)
-  }
-
-  override def getStartSignUpPage[A](implicit request: Request[A], form: Form[String]): Html = {
-    securesocial.views.html.Registration.startSignUp(form)
+  override def getSignUpPage[A](implicit request: Request[A], form: Form[RegistrationInfo]): Html = {
+    securesocial.views.html.Registration.signUp(form)
   }
 
   override def getStartResetPasswordPage[A](implicit request: Request[A], form: Form[String]): Html = {

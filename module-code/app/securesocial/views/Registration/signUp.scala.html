@@ -1,4 +1,4 @@
-@(signUpForm:Form[securesocial.controllers.Registration.RegistrationInfo], token: String)(implicit request: RequestHeader)
+@(signUpForm:Form[securesocial.controllers.Registration.RegistrationInfo])(implicit request: RequestHeader)
 @import securesocial.core.providers.UsernamePasswordProvider
 @import securesocial.core.IdentityProvider
 @import helper._
@@ -15,7 +15,7 @@
         </div>
     }
 
-    <form action="@securesocial.core.providers.utils.RoutesHelper.handleSignUp(token).absoluteURL(IdentityProvider.sslEnabled)"
+    <form action="@securesocial.core.providers.utils.RoutesHelper.handleSignUp().absoluteURL(IdentityProvider.sslEnabled)"
           class="form-horizontal"
           autocomplete= "off"
           method="POST"
