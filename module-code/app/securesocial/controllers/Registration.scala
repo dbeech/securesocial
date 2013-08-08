@@ -230,9 +230,9 @@ object Registration extends Controller {
         }
         val eventSession = Events.fire(new SignUpEvent(user)).getOrElse(session)
         if ( UsernamePasswordProvider.signupSkipLogin ) {
-          ProviderController.completeAuthentication(user, eventSession).flashing(Success -> Messages(SignUpDone))
+          ProviderController.completeAuthentication(user, eventSession)
         } else {
-          Redirect(onHandleSignUpGoTo).flashing(Success -> Messages(SignUpDone)).withSession(eventSession)
+          Redirect(onHandleSignUpGoTo).withSession(eventSession)
         }
       }
     )
