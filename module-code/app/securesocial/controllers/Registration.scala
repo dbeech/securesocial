@@ -83,7 +83,9 @@ object Registration extends Controller {
       UserName -> nonEmptyText.verifying( Messages(UserNameAlreadyTaken), userName => {
           UserService.find(UserId(userName,providerId)).isEmpty
       }),
-      Email -> nonEmptyText,
+      Email -> nonEmptyText.verifying( "An account with your email address already exists", email => {
+          UserService.findByEmailAndProvider(email, null).isEmpty
+      }),
       FirstName -> nonEmptyText,
       LastName -> nonEmptyText,
       (Password ->
@@ -103,7 +105,9 @@ object Registration extends Controller {
 
   val formWithoutUsername = Form[RegistrationInfo](
     mapping(
-      Email -> nonEmptyText,
+      Email -> nonEmptyText.verifying( "An account with your email address already exists", email => {
+        UserService.findByEmailAndProvider(email, null).isEmpty
+      }),
       FirstName -> nonEmptyText,
       LastName -> nonEmptyText,
       (Password ->
